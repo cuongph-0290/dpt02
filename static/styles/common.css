@@ -1,0 +1,18 @@
+body {
+  background-image: url('../images/mms.jpg');
+  background-position-y: top;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.app-header {
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  background-color: #0000002b;
+}
+
+.app-header #navbarHeader {
+  position: relative;
+  width: 100%;
+}
