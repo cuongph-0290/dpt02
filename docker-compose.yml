@@ -1,0 +1,24 @@
+# https://medium.com/@minghz42/docker-setup-for-django-on-mysql-1f063c9d16a0
+# sudo docker-compose up
+# sudo docker exec -it tmp_web_1 bash
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    ports:
+      - '3406:3306'
+    environment:
+       MYSQL_DATABASE: 'dpt02'
+       MYSQL_USER: 'root'
+       MYSQL_PASSWORD: 'password'
+       MYSQL_ROOT_PASSWORD: 'password'
+  web:
+    image: dpt02_web:latest
+    tty: true
+    volumes:
+      - .:/dpt02
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
