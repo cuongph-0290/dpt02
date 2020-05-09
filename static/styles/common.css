@@ -8,8 +8,12 @@ body {
 .app-header {
   position: absolute;
   width: 100%;
-  z-index: 1;
-  background-color: #0000002b;
+  z-index: 200;
+  border-bottom-color: #ffffff30 !important;
+}
+
+.header-collapsed {
+  background-color: #000000ba;
 }
 
 .app-header #navbarHeader {
