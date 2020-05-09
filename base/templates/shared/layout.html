@@ -20,22 +20,17 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'styles/common.css' %}">
 
-<div class="navbar navbar-dark app-header col">
+<div class="navbar navbar-dark app-header border-bottom col">
   <div class="collapse" id="navbarHeader">
     <div class="row">
       <div class="col-md-10 py-4">
         <h4 class="text-white">About</h4>
         <p class="text-muted">Django project training 02.</p>
       </div>
-      <div class="col-md-1 offset-md-1 py-4">
-        <div class="row pl-2">
-          <span class="text-white"></span>
-          <span></span><h4 class="text-white">User name</h4></span>
-        </div>
-        <ul class="list-unstyled">
-          <li><a href='' class="text-white text-muted">Profile</a></li>
-          <li><a href='' class="text-white text-muted">Logout</a></li>
-        </ul>
+      <div class="col-md-1 pl-5 py-4">
+        <h4 class="text-white">User</h4>
+        <span class="text-muted">Profile</span>
+        <span class="text-muted pl-1">Logout</span>
       </div>
     </div>
   </div>
@@ -49,5 +44,12 @@
   </div>
 </div>
 
+{% block sidebar_content %}{% endblock %}
 {% block page_content %}{% endblock %}
 {% block script %}{% endblock %}
+
+<script type="text/javascript">
+  $('.navbar-toggler').on('click', function() {
+    $($('.app-header')[0]).toggleClass('header-collapsed')
+  })
+</script>
