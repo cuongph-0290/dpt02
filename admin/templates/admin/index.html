@@ -6,4 +6,37 @@
 {% endblock %}
 
 {% block page_content %}
+  <div class="row page-content">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div class="row pt-3 pl-2 list-items">
+        <div class="col-md-3 item">
+          <div class="title">
+            <h2>Jupiter</h2>
+          </div>
+          <div class="detail">
+            Auto boot answer
+          </div>
+        </div>
+        <div class="col-md-3 item">
+          <div class="title">
+            <h2>Saturn</h2>
+          </div>
+          <div class="detail">
+            Auto boot rake task
+          </div>
+        </div>
+        <div class="col-md-3 item">
+          <div class="title">
+            <h2>Django project training 01</h2>
+          </div>
+          <div class="detail">
+            ...
+          </div>
+        </div>
+      </div>
+      {% include 'shared/paginate.html' %}
+    </div>
+    {% include 'shared/searchbar.html' %}
+  </div>
 {% endblock %}

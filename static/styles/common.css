@@ -13,10 +13,28 @@ body {
 }
 
 .header-collapsed {
-  background-color: #000000ba;
+  background-color: #000000dd;
 }
 
 .app-header #navbarHeader {
   position: relative;
   width: 100%;
+}
+
+.page-content {
+  padding-top: 65px;
+  color: white;
+}
+
+.page-content .list-items {
+  height: calc(100vh - 180px);
+}
+
+.page-content .list-items .item .title {
+  height: 100px;
+  border-bottom: solid #ffffff30 1px !important;
+}
+
+.page-content .list-items .item .detail {
+  padding-top: 10px;
 }
