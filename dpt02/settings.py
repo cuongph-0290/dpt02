@@ -31,13 +31,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'dashboard.apps.DashboardConfig',
-    'admin.apps.AdminConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'apps.dashboard',
+    'apps.admin',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +57,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'base/templates'),
+            os.path.join(BASE_DIR, 'apps/base/templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -131,5 +132,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'apps/static'),
 ]
