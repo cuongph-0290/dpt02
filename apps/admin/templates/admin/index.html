@@ -2,14 +2,15 @@
 {% load static %}
 
 {% block sidebar_content %}
-  {% include 'shared/sidebar.html' %}
+  {% include 'shared/leftsidebar.html' %}
+  {% include 'shared/rightsidebar.html' %}
 {% endblock %}
 
 {% block page_content %}
   <div class="row page-content">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-      <div class="row pt-3 pl-2 list-items">
+      <div class="row pt-3 pl-3 list-items">
         <div class="col-md-3 item">
           <div class="title">
             <h2>Jupiter</h2>
@@ -37,6 +38,5 @@
       </div>
       {% include 'shared/paginate.html' %}
     </div>
-    {% include 'shared/searchbar.html' %}
   </div>
 {% endblock %}
