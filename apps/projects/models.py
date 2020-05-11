@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-from apps.base.models import TimeStampMixin
+from apps.core.models import TimeStampMixin
 
 class Project(TimeStampMixin, models.Model):
   title = models.CharField(max_length=255)

@@ -1,10 +1,8 @@
-export default class ItemDetail {
-  constructor(data) {
-    this.data = data
-  }
+import Component from './Component.js';
 
+export default class ItemDetail extends Component {
   render() {
-    const { title, description } = this.data
+    const { title, description } = this.props
 
     return `
       <div class="col-md-3 item">

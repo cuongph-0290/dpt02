@@ -1,56 +1,52 @@
-import ItemDetail from '../shared/ItemDetail.js'
+import Component from '../shared/Component.js'
+import ListItems from '../shared/ListItems.js'
+import Paginate from '../shared/Paginate.js'
 
-export default class Dashboard {
-  constructor(element, props = {}) {
-    this.element = element
-    this.props = props
-    this.state = {
-      items: []
-    }
+import { fetchData } from '../shared/helpers.js'
 
-    this.element.innerHTML = this.render()
+export default class Dashboard extends Component {
+  constructor(element, props) {
+    super(element, props)
 
-    this.componentDidMount()
+    this.fetchData()
   }
 
-  fetchData(callback) {
-    $.ajax({
-      url: '/api/projects',
-      method: 'POST',
-      data: {
-        csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val()
-      }
-    }).done(response => {
-      this.state.items = response.projects
-
-      callback && callback()
-    })
-  }
-
-  componentDidMount() {
+  fetchData() {
     const $this = this
 
-    this.fetchData(function() {
-      $($this.element).find('.list-items')[0].innerHTML = $this.renderListItems()
+    fetchData({
+      url: '/api/projects',
+      data: { page: 1 },
+      callback: function(response) {
+        const items = JSON.parse(response.objects).map(({ fields }) => fields)
+
+        $this.setStore({ items })
+      }
     })
   }
 
-  renderListItems() {
-    return this.state.items.map(item => {
-      return (new ItemDetail(item)).render()
-    }).join('')
+  prepareChildElements() {
+    this.childElements.listItems =
+      new ListItems($(this.element).find('.list-items')[0])
+    this.childElements.listItems.setStore({ items: this.store.items })
+
+    this.childElements.paginate =
+      new Paginate($(this.element).find('.paginate')[0])
   }
 
-  render() {
+  innerHTML() {
     return `
-      <div class="col-md-2"></div>
-      <div class="col-md-8">
-        <div class="row pt-3 pl-3 list-items">
-          ${this.renderListItems()}
+      <div class="row page-content">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <div class="row pt-3 pl-3 list-items">
+          </div>
+          <div class="paginate">
+          </div>
         </div>
       </div>
     `
   }
 }
 
-new Dashboard($('#dashboard')[0])
+(new Dashboard($('#dashboard')[0])).render()
