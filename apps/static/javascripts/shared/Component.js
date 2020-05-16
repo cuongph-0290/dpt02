@@ -8,7 +8,6 @@ export default class Component {
 
   setStore(options) {
     this.store = { ...this.store, ...options }
-    this.render()
   }
 
   prepareChildElements(element = this.element) {
