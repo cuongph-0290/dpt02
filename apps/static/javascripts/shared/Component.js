@@ -4,6 +4,8 @@ export default class Component {
     this.props = props
     this.store = {}
     this.childElements = {}
+
+    this.render()
   }
 
   setStore(options) {
