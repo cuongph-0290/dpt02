@@ -39,3 +39,7 @@ body {
 .page-content .list-items .item .detail {
   padding-top: 10px;
 }
+
+.clickable {
+  cursor: pointer;
+}

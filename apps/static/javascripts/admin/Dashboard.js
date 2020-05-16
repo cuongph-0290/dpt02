@@ -8,30 +8,46 @@ export default class Dashboard extends Component {
   constructor(element, props) {
     super(element, props)
 
-    this.fetchData()
+    this.store = {
+      items: [],
+      num_pages: 0,
+      page_number: 1,
+    }
+
+    this.fetchData(this.handleResponse)
   }
 
-  fetchData() {
-    const $this = this
-
+  fetchData(callback) {
     fetchData({
       url: '/api/projects',
-      data: { page: 1 },
-      callback: function(response) {
-        const items = JSON.parse(response.objects).map(({ fields }) => fields)
-
-        $this.setStore({ items })
-      }
+      data: { page: this.store.page_number },
+      callback
     })
   }
 
+  handleResponse = response => {
+    const items = JSON.parse(response.objects).map(({ fields }) => fields)
+    const { num_pages } = response
+
+    this.setStore({ items, num_pages })
+    this.render()
+  }
+
   prepareChildElements() {
+    const { items, num_pages, page_number } = this.store
+
     this.childElements.listItems =
-      new ListItems($(this.element).find('.list-items')[0])
-    this.childElements.listItems.setStore({ items: this.store.items })
+      new ListItems(this.element.querySelector('.list-items'))
+    this.childElements.listItems.setStore({ items })
 
     this.childElements.paginate =
-      new Paginate($(this.element).find('.paginate')[0])
+      new Paginate(this.element.querySelector('.paginate'), {
+        handleClick: page_number => {
+          this.setStore({ page_number })
+          this.fetchData(this.handleResponse)
+        }
+      })
+    this.childElements.paginate.setStore({ num_pages, page_number })
   }
 
   innerHTML() {
@@ -49,4 +65,4 @@ export default class Dashboard extends Component {
   }
 }
 
-(new Dashboard($('#dashboard')[0])).render()
+new Dashboard(document.querySelector('#dashboard'))
