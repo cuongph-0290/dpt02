@@ -7,11 +7,13 @@
 {% endblock %}
 
 {% block page_content %}
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <div id="mainview">
   </div>
 {% endblock %}
 
 {% block script %}
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script type="module" src="{% static 'javascripts/admin/Dashboard.js' %}"></script>
 {% endblock %}
 
