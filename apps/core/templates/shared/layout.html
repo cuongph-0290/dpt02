@@ -15,6 +15,7 @@
 </script>
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'styles/common.css' %}">
+<script type="text/javascript" src="{% static 'javascripts/shared/common.js' %}"></script>
 
 <div class="navbar navbar-dark app-header border-bottom col">
   <div class="collapse" id="navbarHeader">
@@ -44,9 +45,3 @@
 {% block page_content %}{% endblock %}
 {% block sidebar_content %}{% endblock %}
 {% block script %}{% endblock %}
-
-<script type="text/javascript">
-  $('.navbar-toggler').on('click', function() {
-    $($('.app-header')[0]).toggleClass('header-collapsed')
-  })
-</script>
