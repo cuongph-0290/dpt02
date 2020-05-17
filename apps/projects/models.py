@@ -22,7 +22,7 @@ class Team(TimeStampMixin, models.Model):
   abbreviation = models.CharField(max_length=255)
   description = models.TextField()
 
-  projects = models.ManyToManyField(Project)
+  projects = models.ManyToManyField(Project, related_name='teams')
   members = models.ManyToManyField(User)
 
   def __str__(self):
