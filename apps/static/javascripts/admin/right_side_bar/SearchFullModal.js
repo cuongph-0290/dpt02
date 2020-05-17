@@ -1,5 +1,5 @@
 import Component from '../../shared/Component.js'
-import { fetchData } from '../../shared/helpers.js'
+import { fetchData, removeEmptyValue } from '../../shared/helpers.js'
 
 export default class SearchFullModal extends Component {
   constructor(element, props) {
@@ -21,7 +21,8 @@ export default class SearchFullModal extends Component {
   }
 
   handleResponse = response => {
-    const teams = JSON.parse(response.objects).map(({ fields }) => fields)
+    const teams =
+      JSON.parse(response.objects).map(({ pk, fields }) => ({ pk, ...fields }))
 
     this.setStore({ teams })
     this.render()
@@ -31,6 +32,10 @@ export default class SearchFullModal extends Component {
     const searchOptions = {
       title__contains: this.element
         .querySelector('#title__contain').value,
+      description__contains: this.element
+        .querySelector('#description__contain').value,
+      teams__id: this.element
+        .querySelector('.select-teams').value || '',
       created_at__gt: this.element.querySelector('#created_at__gt').value,
       created_at__lt: this.element.querySelector('#created_at__lt').value,
     }
@@ -40,7 +45,7 @@ export default class SearchFullModal extends Component {
 
   prepareChildElements() {
     const teamOptions = (this.store.teams || []).map(team =>
-      `<option value=${team.id}>${team.title}</option>`).join('')
+      `<option value=${team.pk}>${team.title}</option>`).join('')
 
     this.element.querySelector('.select-teams').innerHTML =
       `<option value=''></option>${teamOptions}`
@@ -57,7 +62,10 @@ export default class SearchFullModal extends Component {
     return `
       <div class="p-3">
         <div class="form-group">
-          <input type="text" class="form-control" id="title__contain" aria-describedby="emailHelp" placeholder="title contain">
+          <input type="text" class="form-control" id="title__contain"placeholder="title contain">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="description__contain"placeholder="description contain">
         </div>
         <div class="form-group">
           <select class="form-control select-teams">
