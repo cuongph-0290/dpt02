@@ -1,8 +1,8 @@
 from django.views.generic import ListView
 from apps.core.views import PaginateMixin, SearchAbleMixin
 
-from ..models import Project
+from apps.projects.models import Team
 
-class ProjectListView(PaginateMixin, SearchAbleMixin, ListView):
+class TeamListView(PaginateMixin, SearchAbleMixin, ListView):
   paginate_by = 4
-  model = Project
+  model = Team

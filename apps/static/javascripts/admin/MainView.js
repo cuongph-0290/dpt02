@@ -19,7 +19,7 @@ export default class MainView extends Component {
   }
 
   handleSearch(searchOptions) {
-    this.setStore({ search_options: searchOptions })
+    this.setStore({ search_options: searchOptions, page_number: 1 })
 
     this.fetchData(this.handleResponse)
   }
