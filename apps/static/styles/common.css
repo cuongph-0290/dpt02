@@ -43,3 +43,18 @@ body {
 .clickable {
   cursor: pointer;
 }
+
+.rightsidebar .dropdown-menu {
+  border-radius: 10px;
+  transform: translate3d(-245px, 20px, 0px) !important;
+  width: 270px;
+  top: 0px !important;
+}
+
+.display-none {
+  display: none !important;
+}
+
+.display-block {
+  display: block !important;
+}

@@ -3,6 +3,8 @@ from django.core import serializers
 from django.core.paginator import Paginator
 from django.views.generic import ListView
 
+import json
+
 class PaginateMixin(ListView):
   def post(self, request, *args, **kwargs):
     queryset = self.get_queryset()
@@ -18,3 +20,10 @@ class PaginateMixin(ListView):
     }
 
     return JsonResponse(data, status=200, safe=False)
+
+class SearchAbleMixin(ListView):
+  def get_queryset(self):
+    search_options = json.loads(
+      self.request.POST.get('search_options').replace("'", "\""))
+
+    return self.model.objects.filter(**search_options)
